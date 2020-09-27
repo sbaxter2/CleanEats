@@ -11,6 +11,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Clean Eats");
-        setTitle("Clean Eats Test");
+        setTitle("Testing");
     }
 }
