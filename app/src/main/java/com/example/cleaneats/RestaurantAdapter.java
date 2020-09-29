@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
-    private List<Integer> numbers;
+    private List<Restaurant> restaurants;
     private Context context;
 
     public RestaurantAdapter(Context context) {
@@ -31,27 +31,38 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
-        holder.placeholder.setText(numbers.get(position) + "");
+        String restaurantName = restaurants.get(position).getRestaurantName();
+        String restaurantAddress = restaurants.get(position).getRestaurantAddress();
+        int inspectionScore = restaurants.get(position).getInspectionScore();
+
+        holder.restaurantName.setText(restaurantName);
+        holder.restaurantAddress.setText(restaurantAddress);
+        holder.inspectionScore.setText(inspectionScore + "");
     }
 
     @Override
     public int getItemCount() {
-         if (numbers == null) return 0;
-         return numbers.size();
+         if (restaurants == null) return 0;
+         return restaurants.size();
     }
 
-    public void setNumbers(List<Integer> numbers) {
-        this.numbers = numbers;
+    public void setNumbers(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+        notifyDataSetChanged();
     }
 
     class RestaurantViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView placeholder;
+        private TextView restaurantName;
+        private TextView restaurantAddress;
+        private TextView inspectionScore;
 
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            placeholder = itemView.findViewById(R.id.tv_mainActivity_placeholder);
+            restaurantName = itemView.findViewById(R.id.tv_listItem_restaurantName);
+            restaurantAddress = itemView.findViewById(R.id.tv_listItem_restaurantAddress);
+            inspectionScore = itemView.findViewById(R.id.tv_listItem_inspectionScore);
         }
     }
 }
