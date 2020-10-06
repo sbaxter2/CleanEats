@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Filter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
@@ -49,6 +51,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public void setNumbers(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
         notifyDataSetChanged();
+    }
+
+    public void getFilter() {
+        /*this is the method we need to make the search work
+        replace void with Filter, multiple people have their own solutions to put it in a baseAdapter
+        not sure why we can't use ArrayAdapter but there's probably a reason, it's late so I can't think
+        it's also too late at night for me to comprehend this class, will try to ask you tomorrow
+        I'm pushing this to github with any real changes commented out just so it won't pitch a fit
+        but we could still build off of it later. PS getting the recyclerview to fit to both tablet and phone
+        simultaneously is a nightmare, format suits the phone for now.
+         */
     }
 
     class RestaurantViewHolder extends RecyclerView.ViewHolder {
