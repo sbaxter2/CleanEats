@@ -21,6 +21,8 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         setTitle("Home Page");
 
+        keywordEditText = findViewById(R.id.et_homePageActivity_keyword);
+
         searchButton = findViewById(R.id.bt_homePageActivity_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
