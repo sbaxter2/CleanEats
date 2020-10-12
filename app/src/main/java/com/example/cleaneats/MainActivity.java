@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Clean Eats");
+        setTitle("Restaurants");
 
         recyclerView = findViewById(R.id.rv_mainActivity);
         recyclerView.setHasFixedSize(true);
