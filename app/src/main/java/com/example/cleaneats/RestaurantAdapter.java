@@ -4,20 +4,25 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.*;
+import java.util.*;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
+public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> implements Filterable {
 
     private List<Restaurant> restaurants;
     private Context context;
+    //private List<String> justNames; //We use this list for the search functions, as long as somebody remembers to actually declare it
+    private List<Restaurant> tempList;
 
     public RestaurantAdapter(Context context) {
         this.context = context;
+        tempList = new ArrayList<>();  //remember to initialize your arrays, kids! Or else.
+
     }
 
     @NonNull
@@ -42,14 +47,21 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     @Override
     public int getItemCount() {
-         if (restaurants == null) return 0;
-         return restaurants.size();
+        if (restaurants == null) return 0;
+        return restaurants.size();
     }
 
     public void setNumbers(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
         notifyDataSetChanged();
     }
+
+   public void searchSetUp(){  //Was NonNull needed? Who knows! I just did it to get rid of the @ in the IDE
+
+       for(int x = 0; x < this.restaurants.size(); x++){
+           this.tempList.add(this.restaurants.get(x));
+       }
+   }
 
     class RestaurantViewHolder extends RecyclerView.ViewHolder {
 
@@ -64,5 +76,37 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             restaurantAddress = itemView.findViewById(R.id.tv_listItem_restaurantAddress);
             inspectionScore = itemView.findViewById(R.id.tv_listItem_inspectionScore);
         }
+    }
+
+    public Filter getFilter() {   //this is gonna be a bitch to implement.
+        searchSetUp();
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    tempList = restaurants;
+                } else {
+                    List<Restaurant> filteredList = new ArrayList<>();
+                    for (Restaurant rest : restaurants) {
+                        if (rest.getRestaurantName().toLowerCase().contains(charString.toLowerCase())) {    //so results aren't case sensitive
+                            filteredList.add(rest);
+                        }
+                    }
+                    tempList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = tempList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                tempList = (ArrayList<Restaurant>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+        return filter;
     }
 }

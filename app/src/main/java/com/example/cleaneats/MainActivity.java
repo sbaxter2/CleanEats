@@ -4,16 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.SearchView;
+import android.view.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private RecyclerView recyclerView;
     private RestaurantAdapter adapter;
+    private SearchView search;
 
     String keyword = "";
 
@@ -33,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RestaurantAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        List<Restaurant> restaurants = new ArrayList<>();
+        //List<Restaurant> names = new ArrayList<>();   //the list we use for the search function
+
+        final List<Restaurant> restaurants = new ArrayList<>();   //the list of restaurants to go in the recyclerview
         restaurants.add(new Restaurant("Moe's Southwest Grill",
                 "2491 Winchester Rd. Memphis, TN 38116", 98));
         restaurants.add(new Restaurant("Starbucks",
@@ -50,5 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 "2491 Winchester Rd. Memphis, TN 38116", 98));
 
         adapter.setNumbers(restaurants);
-    }
+
+        search = findViewById(R.id.search);
+        //Insert search here
+
+
+}
 }
