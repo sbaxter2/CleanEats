@@ -1,4 +1,4 @@
-package com.example.cleaneats;
+/*package com.example.cleaneats;
 
 public class Restaurant {
 
@@ -24,4 +24,4 @@ public class Restaurant {
         return restaurantName;
     }
 
-}
+}*/
